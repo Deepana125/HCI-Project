@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="HCIProject">
+    <output-path>$PROJECT_DIR$/out/artifacts/HCIProject</output-path>
+    <root id="archive" name="HCIProject.jar">
+      <element id="library" level="project" name="j3dcore" />
+      <element id="library" level="project" name="j3dutils" />
+      <element id="library" level="project" name="vecmath" />
+    </root>
+  </artifact>
+</component>
