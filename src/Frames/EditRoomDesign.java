@@ -38,7 +38,7 @@ import java.io.IOException;
 
 
 
-public class RoomDesigner extends JFrame {
+public class EditRoomDesign extends JFrame {
     private List<Furniture2DItem> furnitureItems = new ArrayList<>();
 
     private javax.media.j3d.Canvas3D canvas3D;
@@ -104,7 +104,7 @@ public class RoomDesigner extends JFrame {
         canvas3D = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
     }
 
-    public RoomDesigner() {
+    public EditRoomDesign() {
         setTitle("Room Designer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(950, 720); // Increase the initial size of the frame
@@ -543,85 +543,5 @@ public class RoomDesigner extends JFrame {
                 designer.setVisible(true);
             }
         });
-    }
-}
-
-class Furniture2DItem {
-    private String type;
-    private Point position;
-
-    public Furniture2DItem(String type, Point position) {
-        this.type = type;
-        this.position = position;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public Point getPosition() {
-        return position;
-    }
-}
-
-class FurnitureTransferable implements Transferable {
-    private String type;
-    private Image image;
-
-    public FurnitureTransferable(String type, Image image) {
-        this.type = type;
-        this.image = image;
-    }
-
-    @Override
-    public DataFlavor[] getTransferDataFlavors() {
-        return new DataFlavor[]{DataFlavor.stringFlavor, DataFlavor.imageFlavor};
-    }
-
-    @Override
-    public boolean isDataFlavorSupported(DataFlavor flavor) {
-        return DataFlavor.stringFlavor.equals(flavor) || DataFlavor.imageFlavor.equals(flavor);
-    }
-
-    @Override
-    public Object getTransferData(DataFlavor flavor) {
-        if (DataFlavor.stringFlavor.equals(flavor)) {
-            return type;
-        }
-        if (DataFlavor.imageFlavor.equals(flavor)) {
-            return image;
-        }
-        return null;
-    }
-}
-class RestrictedOrbitBehavior extends OrbitBehavior {
-    public RestrictedOrbitBehavior(javax.media.j3d.Canvas3D canvas, int flags) {
-        super(canvas, flags);
-        setRotFactors(1.0, 0.0); // Disallow vertical rotation.
-    }
-}
-
-interface OrbitBehaviorInterface {
-    void updateViewPlatform();
-}
-
-class CustomOrbitBehavior extends OrbitBehavior implements OrbitBehaviorInterface {
-    public static final int REVERSE_ROTATE = 2; // Define custom constant for reverse rotate
-
-    private int rotationAxis;
-
-    public CustomOrbitBehavior(Canvas3D canvas, int rotationAxis) {
-        super(canvas, OrbitBehavior.REVERSE_ALL);
-        this.rotationAxis = rotationAxis;
-    }
-
-    @Override
-    public void updateViewPlatform() {
-        // Get the current viewing transform
-        TransformGroup viewingTG = getViewingPlatform().getViewPlatformTransform();
-        Transform3D currentRotation = new Transform3D();
-        viewingTG.getTransform(currentRotation);
-
-        viewingTG.setTransform(currentRotation);
     }
 }
