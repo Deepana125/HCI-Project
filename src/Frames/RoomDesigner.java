@@ -38,10 +38,9 @@ import java.io.IOException;
 
 
 
-public class RoomDesigner extends JFrame {
+public class RoomDesigner extends JPanel {
     private List<Furniture2DItem> furnitureItems = new ArrayList<>();
-
-    private javax.media.j3d.Canvas3D canvas3D;
+    private Canvas3D canvas3D;
     private SimpleUniverse universe;
     private ImageIcon bedIcon = new ImageIcon("src/Resources/bed.jpg");
     private JTextField roomNumberField = new JTextField(10); // Initialize with appropriate columns
@@ -105,9 +104,7 @@ public class RoomDesigner extends JFrame {
     }
 
     public RoomDesigner() {
-        setTitle("Room Designer");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(950, 720); // Increase the initial size of the frame
+        setLayout(new BorderLayout());
 
         // Toolbar on the top
         JPanel topToolbarPanel = createTopToolbar();
@@ -164,7 +161,6 @@ public class RoomDesigner extends JFrame {
                 }
             }
         });
-
         return panel;
     }
 
@@ -230,14 +226,14 @@ public class RoomDesigner extends JFrame {
         return topToolbar;
     }
     private void resetCanvas() {
-        // Clear the list of furniture items
-        furnitureItems.clear();
-
-        // Repaint the design area panel to remove all added pictures
-        JPanel designAreaPanel = (JPanel) getContentPane().getComponent(2); // Assuming designAreaPanel is the third component
-        designAreaPanel.removeAll();
-        designAreaPanel.revalidate();
-        designAreaPanel.repaint();
+//        // Clear the list of furniture items
+//        furnitureItems.clear();
+//
+//        // Repaint the design area panel to remove all added pictures
+//        JPanel designAreaPanel = (JPanel) getContentPane().getComponent(2); // Assuming designAreaPanel is the third component
+//        designAreaPanel.removeAll();
+//        designAreaPanel.revalidate();
+//        designAreaPanel.repaint();
     }
 
 
@@ -546,23 +542,23 @@ public class RoomDesigner extends JFrame {
     }
 }
 
-class Furniture2DItem {
-    private String type;
-    private Point position;
-
-    public Furniture2DItem(String type, Point position) {
-        this.type = type;
-        this.position = position;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public Point getPosition() {
-        return position;
-    }
-}
+//class Furniture2DItem {
+//    private String type;
+//    private Point position;
+//
+//    public Furniture2DItem(String type, Point position) {
+//        this.type = type;
+//        this.position = position;
+//    }
+//
+//    public String getType() {
+//        return type;
+//    }
+//
+//    public Point getPosition() {
+//        return position;
+//    }
+//}
 
 class FurnitureTransferable implements Transferable {
     private String type;

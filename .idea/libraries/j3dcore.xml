@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="j3dcore">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../../../Java3D/Java3D/j3dcore.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../Softwares/Java3D/j3dcore.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

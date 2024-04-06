@@ -5,3 +5,10 @@ Furniture Details:
 Type: Cupboard
 Position: 180, 256
 
+Room Number: 12
+Width: 12
+Height: 6
+Furniture Details:
+Type: Cupboard
+Position: 180, 256
+

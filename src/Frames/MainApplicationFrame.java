@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 public class MainApplicationFrame extends JFrame {
     private JPanel sidebarPanel;
     private JPanel contentPanel;
+    private RoomDesignList roomDesignList;
+    private RoomDesigner roomDesigner;
 
     public MainApplicationFrame() {
         setTitle("Main Application");
@@ -18,27 +20,25 @@ public class MainApplicationFrame extends JFrame {
         sidebarPanel = new JPanel();
         sidebarPanel.setLayout(new BoxLayout(sidebarPanel, BoxLayout.Y_AXIS));
 
+        // Initialize content panel
+        contentPanel = new JPanel(new BorderLayout());
+
+        // Initialize RoomDesignList
+        roomDesignList = new RoomDesignList(); // Initialize RoomDesignList
+        roomDesignList.setOpaque(false); // Make the panel transparent
+
         // Add sidebar items
         JButton homeButton = new JButton("Home");
-        homeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showHomePage();
-            }
-        });
+        homeButton.addActionListener(e -> showHomePage());
         sidebarPanel.add(homeButton);
 
         JButton roomDesignerButton = new JButton("Room Designer");
-        roomDesignerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showRoomDesigner();
-            }
-        });
+        roomDesignerButton.addActionListener(e -> showRoomDesignerPanel());
         sidebarPanel.add(roomDesignerButton);
 
-        // Initialize content panel
-        contentPanel = new JPanel(new BorderLayout());
+        JButton savedRoomDesignerButton = new JButton("Saved Rooms");
+        savedRoomDesignerButton.addActionListener(e -> showSavedRoomDesigner());
+        sidebarPanel.add(savedRoomDesignerButton);
 
         // Initially show the home page
         showHomePage();
@@ -57,39 +57,27 @@ public class MainApplicationFrame extends JFrame {
         contentPanel.repaint();
     }
 
-
-
-
-    private JPanel createHomePagePanel() {
-        JPanel homePagePanel = new JPanel(new BorderLayout());
-
-        // Add the contents of the home page to homePagePanel
-        // For example:
-        JLabel headingLabel = new JLabel("Home Page", SwingConstants.CENTER);
-        headingLabel.setFont(new Font("Arial", Font.BOLD, 36));
-        homePagePanel.add(headingLabel, BorderLayout.NORTH);
-
-        // Add more components as needed
-
-        return homePagePanel;
+    private void showRoomDesignerPanel() {
+        contentPanel.removeAll();
+        roomDesigner = new RoomDesigner();
+        contentPanel.add(roomDesigner, BorderLayout.CENTER);
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
 
-    private void showRoomDesigner() {
-        // Create a new instance of RoomDesigner
-        RoomDesigner roomDesigner = new RoomDesigner();
 
-        // Display the RoomDesigner frame
-        roomDesigner.setVisible(true);
+
+    private void showSavedRoomDesigner() {
+        contentPanel.removeAll();
+        contentPanel.add(roomDesignList, BorderLayout.CENTER);
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
-
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                MainApplicationFrame mainFrame = new MainApplicationFrame();
-                mainFrame.setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            MainApplicationFrame mainFrame = new MainApplicationFrame();
+            mainFrame.setVisible(true);
         });
     }
 }
